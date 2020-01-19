@@ -113,9 +113,13 @@ class aisServer:
         # destination_table = self.bigquery_client.get_table(self.dataset.table(self.table_name))
         # print("Loaded {} rows.".format(destination_table.num_rows))
 
+    def shudown(self):
+        os.system("shutdown /s /t 1")
+
 
 if __name__ == '__main__':
     a = aisServer()
-    a.download_input()
-    a.upload_output()
-    a.wirte_query()
+    # a.download_input()
+    # a.upload_output()
+    # a.wirte_query()
+    a.shudown()
