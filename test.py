@@ -72,10 +72,10 @@ class aisServer:
 
     def download_input(self):
         def sort_key(item):
-            return item.name
+            return datetime.strptime(item.name.split('_')[-1].split('.')[0], "%Y-%m-%d").toordinal()
         blobs = self.storage_client.list_blobs(self.bucket_input)
         blobs = [blob for blob in blobs]
-        blobs.sort()
+        blobs.sort(key=sort_key)
         self.latest_blob = blobs[0]
         self.input_file = self.latest_blob.name
         self.latest_blob.download_to_filename(self.input_file)
@@ -114,4 +114,3 @@ if __name__ == '__main__':
     a.download_input()
     a.upload_output()
     a.wirte_query()
-
