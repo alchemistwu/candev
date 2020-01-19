@@ -48,7 +48,7 @@ class aisServer:
         self.project = self.bigquery_client.project
         self.bucket_input = "candev-ais"
         self.bucket_output = "candev-ais-output"
-        self.output_blob = "out_hour.json"
+        self.output_blob = "out.json"
         self.table_name = "aisTable"
         self.schemas = ['second', 'mmsi', 'cur_speed_2', 'imo_num', 'virtual_aton', 'haz_cargo', 'year', 'keep_flag', 'aton_type',
              'ack_required', 'ext_water_level', 'wind_ave', 'nav_status', 'quiet', 'unit_flag', 'timestamp', 'id',
@@ -81,10 +81,10 @@ class aisServer:
 
     def upload_output(self):
         bucket = self.storage_client.get_bucket(self.bucket_output)
-        blob = bucket.blob(self.output_blob + '1')
-        blob.upload_from_file(self.output_blob)
+        blob = bucket.blob(self.output_blob)
+        blob.upload_from_file(os.path.join('candev', self.output_blob))
         print('File {} uploaded to {}.'.format(
-            self.output_blob + '1',
+            self.output_blob,
             self.output_blob))
 
     def wirte_query(self):
