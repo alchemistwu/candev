@@ -99,10 +99,12 @@ def add_speed(in_file):
                     s = d / time_h
                     if s == 0:
                         msg['speed'] = int(s)
-                        # print(msg['speed'])
+                    msg['speed'] = s
+                    # print(msg['speed'])
                     prev_dic[msg['mmsi']] = {'loc': (msg['y'], msg['x']), 'time': t_cur}
                 else:
                     msg['speed'] = -1
+
             yield msg
 
 
@@ -114,7 +116,7 @@ def write_speed(infile, outfile):
 
 
 if __name__ == "__main__":
-    raw_dir = "../../data/raw_all/CCG_AIS_Log_2018-05-01.csv"
-    count = write_json(raw_dir, 'out_hour.json')
-    print(count)
+    # raw_dir = "../../data/raw_all/CCG_AIS_Log_2018-05-01.csv"
+    # count = write_json(raw_dir,'out_hour.json')
+    # print(count)
     write_speed('out_hour.json', 'out_speed.json')
