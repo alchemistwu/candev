@@ -114,7 +114,7 @@ class aisServer:
         # print("Loaded {} rows.".format(destination_table.num_rows))
 
     def shudown(self):
-        os.system("shutdown /s /t 1")
+        os.system("systemctl poweroff")
 
 
 if __name__ == '__main__':
