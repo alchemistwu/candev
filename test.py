@@ -96,7 +96,7 @@ class aisServer:
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         try:
             self.bigquery_client.get_table(self.table_name)
-            job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
+            job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
         except:
             pass
         uri = "gs://%s/%s" % (self.bucket_output, self.output_blob)
