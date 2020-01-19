@@ -72,13 +72,14 @@ class aisServer:
 
     def download_input(self):
         def sort_key(item):
-            return datetime.strptime(item.name.split('_')[-1].split('.')[0], "%Y-%m-%d").toordinal()
+            return -datetime.strptime(item.name.split('_')[-1].split('.')[0], "%Y-%m-%d").toordinal()
         blobs = self.storage_client.list_blobs(self.bucket_input)
         blobs = [blob for blob in blobs]
         blobs.sort(key=sort_key)
         self.latest_blob = blobs[0]
         self.input_file = self.latest_blob.name
         self.latest_blob.download_to_filename(self.input_file)
+        print(self.input_file)
         print(os.path.exists(self.input_file))
 
     def upload_output(self):
@@ -87,6 +88,7 @@ class aisServer:
         blob = bucket.blob(self.output_blob)
         blob.upload_from_filename(self.output_blob)
         print('File {} uploaded to {}.'.format(self.output_blob, self.output_blob))
+        os.remove(self.input_file)
 
     def wirte_query(self):
         job_config = bigquery.LoadJobConfig()
@@ -94,7 +96,7 @@ class aisServer:
         job_config.source_format = bigquery.SourceFormat.NEWLINE_DELIMITED_JSON
         try:
             self.bigquery_client.get_table(self.table_name)
-            job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND
+            job_config.write_disposition = bigquery.WriteDisposition.WRITE_TRUNCATE
         except:
             pass
         uri = "gs://%s/%s" % (self.bucket_output, self.output_blob)
