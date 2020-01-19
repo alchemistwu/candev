@@ -119,7 +119,7 @@ class aisServer:
 
 if __name__ == '__main__':
     a = aisServer()
-    # a.download_input()
-    # a.upload_output()
-    # a.wirte_query()
+    a.download_input()
+    a.upload_output()
+    a.wirte_query()
     a.shudown()
