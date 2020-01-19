@@ -76,14 +76,14 @@ class aisServer:
         blobs = [blob for blob in blobs]
         blobs.sort()
         self.latest_blob = blobs[0]
-        input_file = os.path.join('candev', self.latest_blob.name)
+        input_file = self.latest_blob.name
         self.latest_blob.download_to_filename(input_file)
         print(os.path.exists(input_file))
 
     def upload_output(self):
         bucket = self.storage_client.get_bucket(self.bucket_output)
         blob = bucket.blob(self.output_blob)
-        blob.upload_from_file(os.path.join('candev', self.output_blob))
+        blob.upload_from_file(self.output_blob)
         print('File {} uploaded to {}.'.format(self.output_blob, self.output_blob))
 
     def wirte_query(self):
@@ -110,6 +110,6 @@ class aisServer:
 if __name__ == '__main__':
     a = aisServer()
     a.download_input()
-    # a.upload_output()
+    a.upload_output()
     # a.wirte_query()
 
