@@ -110,6 +110,6 @@ class aisServer:
 
 if __name__ == '__main__':
     a = aisServer()
-    # a.upload_output()
-    a.wirte_query()
+    a.upload_output()
+    # a.wirte_query()
 
