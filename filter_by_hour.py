@@ -1,4 +1,4 @@
-# import ais.stream
+import ais.stream
 from tqdm import tqdm
 import os
 import json
