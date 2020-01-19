@@ -48,7 +48,7 @@ class aisServer:
         self.project = self.bigquery_client.project
         self.bucket_input = "candev-ais"
         self.bucket_output = "candev-ais-output"
-        self.output_blob = "out.json"
+        self.output_blob = "out_hour.json"
         self.table_name = "aisTable"
         self.schemas = ['second', 'mmsi', 'cur_speed_2', 'imo_num', 'virtual_aton', 'haz_cargo', 'year', 'keep_flag', 'aton_type',
              'ack_required', 'ext_water_level', 'wind_ave', 'nav_status', 'quiet', 'unit_flag', 'timestamp', 'id',
@@ -110,5 +110,6 @@ class aisServer:
 
 if __name__ == '__main__':
     a = aisServer()
-    a.upload_output()
+    # a.upload_output()
+    a.wirte_query()
 
