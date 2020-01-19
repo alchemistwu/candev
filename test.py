@@ -112,6 +112,10 @@ class aisServer:
 
         # destination_table = self.bigquery_client.get_table(self.dataset.table(self.table_name))
         # print("Loaded {} rows.".format(destination_table.num_rows))
+        if os.path.exists("out.json"):
+            os.remove("out.json")
+        if os.path.exists("temp.json"):
+            os.remove("temp.json")
 
     def shudown(self):
         os.system("systemctl poweroff")
