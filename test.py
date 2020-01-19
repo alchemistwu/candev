@@ -38,7 +38,7 @@ import os
 from datetime import datetime
 from google.cloud import bigquery
 import json
-import filter_by_hour
+import parse
 
 class aisServer:
     def __init__(self):
@@ -83,7 +83,10 @@ class aisServer:
         print(os.path.exists(self.input_file))
 
     def upload_output(self):
-        print(filter_by_hour.write_json(self.input_file, self.output_blob))
+        # print(filter_by_hour.write_json(self.input_file, self.output_blob))
+        count = parse.write_json(self.input_file, 'temp.json')
+        print(count)
+        parse.write_speed('temp.json', self.output_blob)
         bucket = self.storage_client.get_bucket(self.bucket_output)
         blob = bucket.blob(self.output_blob)
         blob.upload_from_filename(self.output_blob)
