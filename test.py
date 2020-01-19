@@ -83,7 +83,7 @@ class aisServer:
     def upload_output(self):
         bucket = self.storage_client.get_bucket(self.bucket_output)
         blob = bucket.blob(self.output_blob)
-        blob.upload_from_file(self.output_blob)
+        blob.upload_from_filename(self.output_blob)
         print('File {} uploaded to {}.'.format(self.output_blob, self.output_blob))
 
     def wirte_query(self):
